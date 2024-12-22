@@ -5,7 +5,7 @@ dotenv.config();
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 (async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto(process.env.SITE_GOTO);
     await delay(1000);
