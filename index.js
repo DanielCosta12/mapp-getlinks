@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
-dotenv.config(); 
+dotenv.config();
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 (async () => {
-    const browser = await puppeteer.launch({headless:false});
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(process.env.SITE_GOTO);
     await delay(1000);
@@ -16,10 +16,10 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     await page.type('#login', process.env.SITE_USERNAME);
     await delay(1000);
-    await page.type('#senha', process.env.SITE_PASSWORD); 
+    await page.type('#senha', process.env.SITE_PASSWORD);
     await delay(1000);
-    
-    await page.click('#btn-entrar-sistema'); 
+
+    await page.click('#btn-entrar-sistema');
     await page.waitForNavigation();
     await delay(1000);
 
@@ -33,6 +33,8 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     console.log('Links encontrados:');
     if (links.length === 0) {
         console.log('Nenhum link encontrado.');
+        await browser.close();
+        return; 
     } else {
         links.forEach((link, index) => {
             console.log(`${index + 1}: ${link}`);
@@ -44,17 +46,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const params = {
         chat_id: process.env.TELEGRAM_CHAT_ID,
         text: messageBody
-    }
+    };
 
     const response = await fetch(telegramUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(params),
     });
-    const data =await response.json();
-    if(data.ok){
+    const data = await response.json();
+    if (data.ok) {
         console.log('Mensagem enviada');
-    }else{console.log('ERROR',data.description)}
+    } else {
+        console.log('ERROR', data.description);
+    }
     await browser.close();
 })();
-
