@@ -9,7 +9,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const page = await browser.newPage();
     await page.goto(process.env.SITE_GOTO);
     await delay(1000);
-    await page.waitForSelector('.cookie-consent__buttons-button.cookie-consent__buttons__close', { timeout: 5000 });
+    await page.waitForSelector('.cookie-consent__buttons-button.cookie-consent__buttons__close', { timeout: 60000 });
     await delay(1000);
     await page.click('.cookie-consent__buttons-button.cookie-consent__buttons__close');
     await delay(1000);
