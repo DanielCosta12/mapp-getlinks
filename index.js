@@ -7,7 +7,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 (async () => {
     const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'] });
     const page = await browser.newPage();
-    await page.goto(process.env.SITE_GOTO);
+    await page.goto(process.env.SITE_GOTO,{ timeout: 60000 });
     await delay(1000);
     await page.waitForSelector('.cookie-consent__buttons-button.cookie-consent__buttons__close', { timeout: 60000 });
     await delay(1000);
