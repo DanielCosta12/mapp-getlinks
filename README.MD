@@ -1,6 +1,6 @@
 # Mapp GetLinks
 
-![Foto do Bot](<Captura de tela 2024-12-26 211326.png>)
+![Foto do Bot](<./img/Captura de tela 2024-12-26 211326.png>)
 
 ## Descrição
 
